@@ -1,0 +1,48 @@
+# Caesar Cipher Implementation
+def caesar_encrypt(plain_text, shift):
+    """
+    Encrypts the plain text using the Caesar Cipher algorithm.
+
+    :param plain_text: The text to be encrypted
+    :param shift: The shift value for encryption
+    :return: The encrypted text
+    """
+    encrypted_text = ""
+    for char in plain_text:
+        if char.isalpha():
+            ascii_offset = 65 if char.isupper() else 97
+            encrypted_char = chr((ord(char) - ascii_offset + shift) % 26 + ascii_offset)
+            encrypted_text += encrypted_char
+        else:
+            encrypted_text += char
+    return encrypted_text
+
+def caesar_decrypt(cipher_text, shift):
+    """
+    Decrypts the cipher text using the Caesar Cipher algorithm.
+
+    :param cipher_text: The text to be decrypted
+    :param shift: The shift value for decryption
+    :return: The decrypted text
+    """
+    decrypted_text = ""
+    for char in cipher_text:
+        if char.isalpha():
+            ascii_offset = 65 if char.isupper() else 97
+            decrypted_char = chr((ord(char) - ascii_offset - shift) % 26 + ascii_offset)
+            decrypted_text += decrypted_char
+        else:
+            decrypted_text += char
+    return decrypted_text
+
+
+plain_text = input("Enter the message to encrypt: ")
+shift = int(input("Enter the shift value: "))
+
+
+cipher_text = caesar_encrypt(plain_text, shift)
+print("Encrypted Text:", cipher_text)
+
+
+decrypted_text = caesar_decrypt(cipher_text, shift)
+print("Decrypted Text:", decrypted_text)
